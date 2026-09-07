@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spice Route | Pure HTML/CSS</title>
+<style>
+  /* RESET & BASE - rem ഉപയോഗിക്കുന്നു accessibility ക്ക് വേണ്ടി */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 16px; }
+  body { font-family: system-ui, sans-serif; line-height: 1.6; background: #fffaf5; color: #121212; }
+
+  /* NAVBAR - Flexbox */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background: white;
+    position: sticky;
+    top: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+  nav .logo { font-size: 1.5rem; font-weight: 800; }
+  nav .logo span { color: #ff5a33; }
+
+  /* Checkbox hack */
+  #menu-toggle { display: none; }
+  .hamburger { display: none; font-size: 1.8rem; cursor: pointer; }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a { text-decoration: none; color: #121212; font-weight: 500; }
+  .nav-links a:hover { color: #ff5a33; }
+
+  /* HERO - section */
+  .hero {
+    min-height: 80vh;
+    background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070') center/cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 2rem;
+  }
+  .hero h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 1rem; }
+  .hero p { font-size: 1.2rem; margin-bottom: 2rem; max-width: 40rem; }
+  .btn-order {
+    background: #ff5a33; color: white; border: none;
+    padding: 0.9rem 2rem; border-radius: 50px;
+    font-size: 1rem; font-weight: 600; cursor: pointer;
+  }
+
+  /* MENU SECTION - Grid */
+  .menu { padding: 4rem 5%; }
+  .menu header { text-align: center; margin-bottom: 2.5rem; }
+  .menu header h2 { font-size: 2.2rem; }
+
+  .card-grid {
+    display: grid;
+    /* Desktop: 4-per-row */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+  article.card {
+    background: white; border-radius: 12px; overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border: 1px solid #eee;
+  }
+  article.card img { width: 100%; height: 180px; object-fit: cover; display: block; }
+  article.card .content { padding: 1rem; }
+  article.card h3 { font-size: 1.1rem; }
+  article.card .price { color: #ff5a33; font-weight: 700; margin: 0.4rem 0 0.8rem; }
+  article.card button {
+    width: 100%; padding: 0.6rem; border-radius: 8px;
+    border: 1px solid #121212; background: transparent; cursor: pointer; font-weight: 600;
+  }
+  article.card button:hover { background: #121212; color: white; }
+
+  /* FOOTER */
+  footer {
+    background: #121212; color: white;
+    text-align: center; padding: 2rem 5%;
+  }
+  footer .socials { margin-bottom: 1rem; display: flex; justify-content: center; gap: 1rem; }
+  footer .socials a { color: white; text-decoration: none; font-size: 1.2rem; }
+
+  /* RESPONSIVE - Media Queries */
+  @media (max-width: 1024px) {
+    /* Tablet: 2-per-row */
+    .card-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    .hamburger { display: block; }
+    .nav-links {
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      background: white;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem;
+      display: none;
+      box-shadow: 0 10px 10px rgba(0,0,0,0.05);
+    }
+    /* No JS menu open */
+    #menu-toggle:checked ~ .nav-links { display: flex; }
+
+    /* Mobile: 1-per-row */
+    .card-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav aria-label="Main Navigation">
+  <strong class="logo">Spice<span>Route</span></strong>
+  
+  <input type="checkbox" id="menu-toggle" aria-hidden="true">
+  <label for="menu-toggle" class="hamburger" aria-label="Toggle Menu">☰</label>
+
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <h1>Authentic Flavors, Made Fresh</h1>
+  <p>From our kitchen to your heart — experience real taste in Coimbatore</p>
+  <button class="btn-order">Order Now</button>
+</section>
+
+<section class="menu" id="menu">
+  <header>
+    <h2>Our Specials</h2>
+    <p>Freshly cooked, daily curated</p>
+  </header>
+
+  <section class="card-grid">
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600" alt="Chicken Biryani">
+      <div class="content"><h3>Chicken Biryani</h3><p class="price">₹299</p><button>Add to Cart</button></div>
+    </article>
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=600" alt="Margherita Pizza">
+      <div class="content"><h3>Margherita Pizza</h3><p class="price">₹249</p><button>Add to Cart</button></div>
+    </article>
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=600" alt="Classic Burger">
+      <div class="content"><h3>Classic Burger</h3><p class="price">₹199</p><button>Add to Cart</button></div>
+    </article>
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600" alt="Ghee Roast Dosa">
+      <div class="content"><h3>Ghee Roast Dosa</h3><p class="price">₹149</p><button>Add to Cart</button></div>
+    </article>
+  </section>
+</section>
+
+<footer>
+  <nav class="socials" aria-label="Social Media">
+    <a href="#" aria-label="Instagram">Instagram</a>
+    <a href="#" aria-label="Facebook">Facebook</a>
+    <a href="#" aria-label="Twitter">Twitter</a>
+  </nav>
+  <p>&copy; 2026 SpiceRoute. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
